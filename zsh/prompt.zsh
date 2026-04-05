@@ -2,6 +2,12 @@ autoload colors && colors
 # cheers, @ehrenmurdick
 # http://github.com/ehrenmurdick/config/blob/master/zsh/prompt.zsh
 
+if (( $+commands[starship] ))
+then
+  eval "$(starship init zsh)"
+  return
+fi
+
 if (( $+commands[git] ))
 then
   git="$commands[git]"
