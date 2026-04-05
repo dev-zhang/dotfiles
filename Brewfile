@@ -1,5 +1,3 @@
-cask_args appdir: '/Applications'
-
 brew 'atuin'
 brew 'maven'
 brew 'mise'
