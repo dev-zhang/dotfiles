@@ -1,13 +1,11 @@
-# Sets reasonable macOS defaults.
-#
-# Or, in other words, set shit how I like in macOS.
-#
-# The original idea (and a couple settings) were grabbed from:
+# 设置合理的 macOS 默认配置。
+# 或者说，按照我的喜好来配置 macOS。
+# 最初的想法（以及一些设置）来源于：
 #   https://github.com/mathiasbynens/dotfiles/blob/master/.macos
 #
-# Run ./set-defaults.sh and you'll be good to go.
+# 运行 ./set-defaults.sh 即可生效。
 
-# Disable press-and-hold for keys in favor of key repeat.
+# 禁用长按按键显示特殊字符菜单，改为按键重复。
 defaults write -g ApplePressAndHoldEnabled -bool false
 
 # 触控板：轻点以点按
@@ -24,37 +22,43 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad DragLock -bool
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Dragging -bool false
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -bool true
 
-# Use AirDrop over every interface. srsly this should be a default.
+# 在所有网络接口上启用 AirDrop。说真的，这应该是默认设置。
 defaults write com.apple.NetworkBrowser BrowseAllInterfaces 1
 
-# Always open everything in Finder's list view. This is important.
+# 始终以列表视图打开 Finder。这很重要。
 defaults write com.apple.Finder FXPreferredViewStyle Nlsv
 
-# Show the ~/Library folder.
+# 显示 ~/Library (资源库) 文件夹。
 chflags nohidden ~/Library
 
-# Set a really fast key repeat.
+# 设置极快的按键重复速度。
 defaults write NSGlobalDomain KeyRepeat -int 1
 
-# Set the Finder prefs for showing a few different volumes on the Desktop.
+# 在桌面上显示外置硬盘和可移动媒体。
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
 defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
 
-# Run the screensaver if we're in the bottom-left hot corner.
+# 将屏幕左下角触发角设置为运行屏幕保护程序。
 defaults write com.apple.dock wvous-bl-corner -int 5
 defaults write com.apple.dock wvous-bl-modifier -int 0
 
-# Hide Safari's bookmark bar.
-defaults write com.apple.Safari.plist ShowFavoritesBar -bool false
+# 清空 dock 栏，只保留 邮件、设置
+defaults write com.apple.dock persistent-apps -array
+defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/System/Applications/Mail.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
+defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/System/Applications/System Settings.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
 
-# Always show Safari's "URL display" tab in the lower left on mouseover. Strangely
-# like, everyone and their LLMs on the internet thinks this is ShowStatusBar, but
-# it's not.
-defaults write com.apple.Safari ShowOverlayStatusBar -bool true
+# 设置 dock 栏 大小为 25
+defaults write com.apple.dock tilesize -int 25
 
-# Set up Safari for development.
-defaults write com.apple.Safari.SandboxBroker ShowDevelopMenu -bool true
-defaults write com.apple.Safari.plist IncludeDevelopMenu -bool true
-defaults write com.apple.Safari.plist WebKitDeveloperExtrasEnabledPreferenceKey -bool true
-defaults write com.apple.Safari.plist "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" -bool true
-defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
+# 开启 自动隐藏和显示程序坞
+defaults write com.apple.dock autohide -bool true
+
+# finder 设置 开启 显示所有文件扩展名
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
+# 路径栏显示完整路径
+defaults write com.apple.finder ShowPathbar -bool true
+
+# 重启 Dock 与 Finder 使上述所有配置生效
+killall Dock
+killall Finder
