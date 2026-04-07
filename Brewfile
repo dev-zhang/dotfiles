@@ -7,6 +7,7 @@ brew 'spaceman-diff'
 brew 'starship'
 brew 'zsh-autosuggestions'
 brew 'zsh-syntax-highlighting'
+brew 'mole'
 
 cask 'apifox'
 cask 'bitwarden'
@@ -22,12 +23,10 @@ cask 'google-chrome'
 cask 'hbuilderx'
 cask 'iina'
 cask 'intellij-idea'
-cask 'navicat-premium-lite'
+cask 'datagrip'
 cask 'obsidian'
 cask 'snipaste'
-cask 'squirrel-app'
 cask 'stats'
-cask 'synology-drive'
 cask 'telegram'
 cask 'termius'
 cask 'ticktick'
@@ -35,8 +34,10 @@ cask 'trae-cn'
 cask 'visual-studio-code'
 cask 'wechatwebdevtools'
 cask 'wechatwork'
+cask 'wpsoffice-cn'
+cask 'synology-drive'
+cask 'squirrel-app'
 
-mas 'WPS Office', id: 1443749478
 mas '微信', id: 836500024
 mas '百度网盘', id: 547166701
 
