@@ -24,8 +24,15 @@ ensure_command_line_tools() {
 
 ensure_command_line_tools
 
+homebrew_installed() {
+  command -v brew >/dev/null 2>&1 \
+    || [ -x /opt/homebrew/bin/brew ] \
+    || [ -x /usr/local/bin/brew ] \
+    || [ -x /home/linuxbrew/.linuxbrew/bin/brew ]
+}
+
 # Check for Homebrew
-if ! command -v brew >/dev/null 2>&1
+if ! homebrew_installed
 then
   echo "  Installing Homebrew for you."
 
