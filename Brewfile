@@ -19,14 +19,12 @@ brew 'zsh-syntax-highlighting'
 # Mac 系统的深度清理与优化命令行工具
 brew 'mole'
 
-# API 文档、调试、Mock、测试一体化协作平台
-cask 'apifox'
 # 开源密码管理器客户端
 cask 'bitwarden'
 # 基于 Tauri 的跨平台 Clash 代理客户端
 cask 'clash-verge-rev'
-# OpenAI Codex 桌面端 AI 编程代理工具
-cask 'codex-app'
+# OpenAI ChatGPT macOS 客户端
+cask 'chatgpt'
 # 钉钉，企业级办公通讯软件
 cask 'dingtalk'
 # macOS 网页视频下载工具
