@@ -1,57 +1,56 @@
-# holman does dotfiles
+# holman 的 dotfiles
 
-Your dotfiles are how you personalize your system. These are mine.
+**[English README](README.en.md)**
 
-I was a little tired of having long alias files and everything strewn about
-(which is extremely common on other dotfiles projects, too). That led to this
-project being much more topic-centric. I realized I could split a lot of things
-up into the main areas I used (Ruby, git, system libraries, and so on), so I
-structured the project accordingly.
+dotfiles 是你个性化自己系统的方式，而这些是我的。
 
-If you're interested in the philosophy behind why projects like these are
-awesome, you might want to [read my post on the
-subject](http://zachholman.com/2010/08/dotfiles-are-meant-to-be-forked/).
+我受够了长长的 alias 文件和四处散落的配置（这在其他 dotfiles 项目里
+也极其常见）。因此这个项目更加以「主题」为中心。我意识到可以把很多
+东西按主要使用领域（Ruby、git、系统库等等）拆分开来，于是项目就按
+这个思路组织了。
 
-## topical
+如果你对这背后的理念感兴趣，可以[读一读我关于这个话题的文章]
+(http://zachholman.com/2010/08/dotfiles-are-meant-to-be-forked/)。
 
-Everything's built around topic areas. If you're adding a new area to your
-forked dotfiles — say, "Java" — you can simply add a `java` directory and put
-files in there. Anything with an extension of `.zsh` will get automatically
-included into your shell. Anything with an extension of `.symlink` will get
-symlinked without extension into `$HOME` when you run `script/bootstrap`.
+## 主题化
 
-## what's inside
+一切都围绕主题领域构建。如果你想在 fork 出来的 dotfiles 里新增一个
+领域——比如「Java」——只需添加一个 `java` 目录并把文件放进去。任何
+以 `.zsh` 为扩展名的文件都会被自动加载进你的 shell。任何以 `.symlink`
+为扩展名的文件，在你运行 `script/bootstrap` 时都会被去掉扩展名后
+软链接到 `$HOME`。
 
-A lot of stuff. Seriously, a lot of stuff. Check them out in the file browser
-above and see what components may mesh up with you.
-[Fork it](https://github.com/holman/dotfiles/fork), remove what you don't
-use, and build on what you do use.
+## 里面有什么
 
-## components
+很多东西。说真的，非常多。在上面的文件浏览器里翻一翻，看看哪些组件
+适合你。[Fork 它](https://github.com/holman/dotfiles/fork)，删掉你用
+不到的，在你用得上的基础上继续构建。
 
-There's a few special files in the hierarchy.
+## 组件
 
-- **bin/**: Anything in `bin/` will get added to your `$PATH` and be made
-  available everywhere.
-- **topic/\*.zsh**: Any files ending in `.zsh` get loaded into your
-  environment.
-- **topic/path.zsh**: Any file named `path.zsh` is loaded first and is
-  expected to setup `$PATH` or similar.
-- **topic/completion.zsh**: Any file named `completion.zsh` is loaded
-  last and is expected to setup autocomplete.
-- **topic/install.sh**: Any file named `install.sh` is executed when you run `script/install`. To avoid being loaded automatically, its extension is `.sh`, not `.zsh`.
-- **topic/\*.symlink**: Any file ending in `*.symlink` gets symlinked into
-  your `$HOME`. This is so you can keep all of those versioned in your dotfiles
-  but still keep those autoloaded files in your home directory. These get
-  symlinked in when you run `script/bootstrap`.
-- **~/.localrc**: Stash environment variables and secrets here — for example
-  AI API keys such as `OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, and
-  `GEMINI_API_KEY`. It's sourced on shell startup by `zsh/zshrc.symlink` and
-  lives outside this repository, so it stays private.
+目录结构里有几个特殊文件。
 
-## install
+- **bin/**：`bin/` 里的任何东西都会被加入你的 `$PATH`，在任何地方
+  都可用。
+- **topic/\*.zsh**：任何以 `.zsh` 结尾的文件都会被加载进你的环境。
+- **topic/path.zsh**：任何名为 `path.zsh` 的文件会最先加载，用于
+  设置 `$PATH` 之类的内容。
+- **topic/completion.zsh**：任何名为 `completion.zsh` 的文件会最后
+  加载，用于设置自动补全。
+- **topic/install.sh**：任何名为 `install.sh` 的文件会在你运行
+  `script/install` 时执行。为了避免被自动加载，它的扩展名是 `.sh`
+  而不是 `.zsh`。
+- **topic/\*.symlink**：任何以 `*.symlink` 结尾的文件都会被软链接到
+  你的 `$HOME`。这样你可以把这些文件纳入版本管理，同时让它们在你的
+  主目录里自动生效。运行 `script/bootstrap` 时会建立这些软链接。
+- **~/.localrc**：把环境变量和密钥放在这里——例如 `OPENAI_API_KEY`、
+  `ANTHROPIC_API_KEY`、`GEMINI_API_KEY` 等 AI API 密钥。它由
+  `zsh/zshrc.symlink` 在 shell 启动时加载，且位于本仓库之外，因此
+  可以保持私密。
 
-Run this:
+## 安装
+
+运行以下命令：
 
 ```sh
 git clone https://github.com/holman/dotfiles.git ~/.dotfiles
@@ -59,33 +58,30 @@ cd ~/.dotfiles
 script/bootstrap
 ```
 
-This will symlink the appropriate files in `.dotfiles` to your home directory.
-Everything is configured and tweaked within `~/.dotfiles`.
+这会把 `.dotfiles` 中相应的文件软链接到你的主目录。所有配置都在
+`~/.dotfiles` 中完成和调整。
 
-The main file you'll want to change right off the bat is `zsh/zshrc.symlink`,
-which sets up a few paths that'll be different on your particular machine.
+你首先会想改的文件是 `zsh/zshrc.symlink`，它设置了一些在你自己机器
+上会有所不同的路径。
 
-`dot` is a simple script that installs some dependencies, sets sane macOS
-defaults, and so on. Tweak this script, and occasionally run `dot` from
-time to time to keep your environment fresh and up-to-date. You can find
-this script in `bin/`.
+`dot` 是一个简单的脚本，用来安装一些依赖、设置合理的 macOS 默认
+配置等等。你可以调整这个脚本，并时不时运行一下 `dot`，让你的环境
+保持新鲜和最新。这个脚本在 `bin/` 目录里。
 
-## bugs
+## 问题反馈
 
-I want this to work for everyone; that means when you clone it down it should
-work for you even though you may not have `rbenv` installed, for example. That
-said, I do use this as _my_ dotfiles, so there's a good chance I may break
-something if I forget to make a check for a dependency.
+我希望这个项目对所有人都可用；也就是说，你 clone 下来之后，即使你
+没有安装 `rbenv` 之类的依赖，它也应该能正常工作。话虽如此，我确实
+把它当作_我自己的_ dotfiles 在用，所以如果我忘了对某个依赖做检查，
+很可能会弄坏一些东西。
 
-If you're brand-new to the project and run into any blockers, please
-[open an issue](https://github.com/holman/dotfiles/issues) on this repository
-and I'd love to get it fixed for you!
+如果你刚接触这个项目并遇到了任何阻碍，请在本仓库[提交 issue]
+(https://github.com/holman/dotfiles/issues)，我很乐意帮你修复！
 
-## thanks
+## 致谢
 
-I forked [Ryan Bates](http://github.com/ryanb)' excellent
-[dotfiles](http://github.com/ryanb/dotfiles) for a couple years before the
-weight of my changes and tweaks inspired me to finally roll my own. But Ryan's
-dotfiles were an easy way to get into bash customization, and then to jump ship
-to zsh a bit later. A decent amount of the code in these dotfiles stem or are
-inspired from Ryan's original project.
+我曾经 fork 了 [Ryan Bates](http://github.com/ryanb) 出色的
+[dotfiles](http://github.com/ryanb/dotfiles) 用了好几年，直到我的
+修改和调整积累到一定程度，促使我最终打造了自己的版本。Ryan 的
+dotfiles 是入门 bash 定制的捷径，后来也让我顺利转向了 zsh。这些
+dotfiles 中相当一部分代码源自或受启发于 Ryan 的原始项目。
