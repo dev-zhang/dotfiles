@@ -44,6 +44,10 @@ There's a few special files in the hierarchy.
   your `$HOME`. This is so you can keep all of those versioned in your dotfiles
   but still keep those autoloaded files in your home directory. These get
   symlinked in when you run `script/bootstrap`.
+- **~/.localrc**: Stash environment variables and secrets here — for example
+  AI API keys such as `OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, and
+  `GEMINI_API_KEY`. It's sourced on shell startup by `zsh/zshrc.symlink` and
+  lives outside this repository, so it stays private.
 
 ## install
 
